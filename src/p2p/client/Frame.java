@@ -9,7 +9,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.LinkedList;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import p2p.model.MessageProcessor;
@@ -153,8 +152,9 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
 
     }
 
-    public void onclose() {
+    private void onclose() {
         addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent evt) {
                 try {
                     sipLayer.sendMessage(serverNotificer, "disconnected");
@@ -189,6 +189,7 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
     private void mostrarUsuario(String message) {
         String[] str = message.split("\\ ");
         String s;
+        modelo.removeAllElements();
         for (int i = 0; i < str.length; i++) {
             s = str[i];
             this.clients.add(s);

@@ -3847,3 +3847,441 @@ Content-Length: 0
 ]]>
 </message>
 
+<!-- Use the  Trace Viewer in src/tools/tracesviewer to view this  trace  
+Here are the stack configuration properties 
+javax.sip.IP_ADDRESS= 192.168.0.12
+javax.sip.STACK_NAME= TextClient
+javax.sip.ROUTER_PATH= null
+javax.sip.OUTBOUND_PROXY= null
+-->
+<!-- Use the  Trace Viewer in src/tools/tracesviewer to view this  trace  
+Here are the stack configuration properties 
+javax.sip.IP_ADDRESS= 192.168.0.12
+javax.sip.STACK_NAME= TextClient
+javax.sip.ROUTER_PATH= null
+javax.sip.OUTBOUND_PROXY= null
+-->
+<message
+from="192.168.0.12:5060" 
+to="192.168.0.12:5061" 
+time="1370993271807"
+isSender="true" 
+transactionId="textclientv1.0:806e82d1ee18b6b851cb977fb07c52b1@192.168.0.12:1:message:192.168.0.12:5060" 
+callId="806e82d1ee18b6b851cb977fb07c52b1@192.168.0.12" 
+firstLine="MESSAGE sip:server@192.168.0.12:5061;transport=udp SIP/2.0" 
+>
+<![CDATA[MESSAGE sip:server@192.168.0.12:5061;transport=udp SIP/2.0
+Call-ID: 806e82d1ee18b6b851cb977fb07c52b1@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5060>;tag=textclientv1.0
+To: "server" <sip:server@192.168.0.12:5061>
+Via: SIP/2.0/UDP 192.168.0.12:5060;branch=branch1
+Max-Forwards: 70
+Contact: "j" <sip:j@192.168.0.12:5060>
+Content-Type: text/plain
+Content-Length: 9
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5060" 
+to="192.168.0.12:5061" 
+time="1370993271941"
+isSender="false" 
+transactionId="textclientv1.0:806e82d1ee18b6b851cb977fb07c52b1@192.168.0.12:1:message:192.168.0.12:5060" 
+callId="806e82d1ee18b6b851cb977fb07c52b1@192.168.0.12" 
+firstLine="MESSAGE sip:server@192.168.0.12:5061;transport=udp SIP/2.0" 
+>
+<![CDATA[MESSAGE sip:server@192.168.0.12:5061;transport=udp SIP/2.0
+Call-ID: 806e82d1ee18b6b851cb977fb07c52b1@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5060>;tag=textclientv1.0
+To: "server" <sip:server@192.168.0.12:5061>
+Via: SIP/2.0/UDP 192.168.0.12:5060;branch=branch1
+Max-Forwards: 70
+Contact: "j" <sip:j@192.168.0.12:5060>
+Content-Type: text/plain
+Content-Length: 9
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5061" 
+to="192.168.0.12:5060" 
+time="1370993273836"
+isSender="true" 
+transactionId="textclientv1.0:734b2fd4007e22e33d8c0e3035ae90a2@192.168.0.12:1:message:192.168.0.12:5061" 
+callId="734b2fd4007e22e33d8c0e3035ae90a2@192.168.0.12" 
+firstLine="MESSAGE sip:j@192.168.0.12:5060;transport=udp SIP/2.0" 
+>
+<![CDATA[MESSAGE sip:j@192.168.0.12:5060;transport=udp SIP/2.0
+Call-ID: 734b2fd4007e22e33d8c0e3035ae90a2@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5061>;tag=textclientv1.0
+To: "j" <sip:j@192.168.0.12:5060>
+Via: SIP/2.0/UDP 192.168.0.12:5061;branch=branch1
+Max-Forwards: 70
+Contact: "j" <sip:j@192.168.0.12:5061>
+Content-Type: text/plain
+Content-Length: 25
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5061" 
+to="192.168.0.12:5060" 
+time="1370993273946"
+isSender="true" 
+transactionId="textclientv1.0:806e82d1ee18b6b851cb977fb07c52b1@192.168.0.12:1:message:192.168.0.12:5060" 
+callId="806e82d1ee18b6b851cb977fb07c52b1@192.168.0.12" 
+firstLine="SIP/2.0 200 OK" 
+>
+<![CDATA[SIP/2.0 200 OK
+Call-ID: 806e82d1ee18b6b851cb977fb07c52b1@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5060>;tag=textclientv1.0
+To: "server" <sip:server@192.168.0.12:5061>;tag=888
+Via: SIP/2.0/UDP 192.168.0.12:5060;branch=branch1
+Content-Length: 0
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5061" 
+to="192.168.0.12:5060" 
+time="1370993273856"
+isSender="false" 
+transactionId="textclientv1.0:734b2fd4007e22e33d8c0e3035ae90a2@192.168.0.12:1:message:192.168.0.12:5061" 
+callId="734b2fd4007e22e33d8c0e3035ae90a2@192.168.0.12" 
+firstLine="MESSAGE sip:j@192.168.0.12:5060;transport=udp SIP/2.0" 
+>
+<![CDATA[MESSAGE sip:j@192.168.0.12:5060;transport=udp SIP/2.0
+Call-ID: 734b2fd4007e22e33d8c0e3035ae90a2@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5061>;tag=textclientv1.0
+To: "j" <sip:j@192.168.0.12:5060>
+Via: SIP/2.0/UDP 192.168.0.12:5061;branch=branch1
+Max-Forwards: 70
+Contact: "j" <sip:j@192.168.0.12:5061>
+Content-Type: text/plain
+Content-Length: 25
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5061" 
+to="192.168.0.12:5060" 
+time="1370993274580"
+isSender="false" 
+transactionId="textclientv1.0:806e82d1ee18b6b851cb977fb07c52b1@192.168.0.12:1:message:192.168.0.12:5060" 
+callId="806e82d1ee18b6b851cb977fb07c52b1@192.168.0.12" 
+firstLine="SIP/2.0 200 OK" 
+>
+<![CDATA[SIP/2.0 200 OK
+Call-ID: 806e82d1ee18b6b851cb977fb07c52b1@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5060>;tag=textclientv1.0
+To: "server" <sip:server@192.168.0.12:5061>;tag=888
+Via: SIP/2.0/UDP 192.168.0.12:5060;branch=branch1
+Content-Length: 0
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5060" 
+to="192.168.0.12:5061" 
+time="1370993274954"
+isSender="true" 
+transactionId="textclientv1.0:734b2fd4007e22e33d8c0e3035ae90a2@192.168.0.12:1:message:192.168.0.12:5061" 
+callId="734b2fd4007e22e33d8c0e3035ae90a2@192.168.0.12" 
+firstLine="SIP/2.0 200 OK" 
+>
+<![CDATA[SIP/2.0 200 OK
+Call-ID: 734b2fd4007e22e33d8c0e3035ae90a2@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5061>;tag=textclientv1.0
+To: "j" <sip:j@192.168.0.12:5060>;tag=888
+Via: SIP/2.0/UDP 192.168.0.12:5061;branch=branch1
+Content-Length: 0
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5060" 
+to="192.168.0.12:5061" 
+time="1370993274977"
+isSender="false" 
+transactionId="textclientv1.0:734b2fd4007e22e33d8c0e3035ae90a2@192.168.0.12:1:message:192.168.0.12:5061" 
+callId="734b2fd4007e22e33d8c0e3035ae90a2@192.168.0.12" 
+firstLine="SIP/2.0 200 OK" 
+>
+<![CDATA[SIP/2.0 200 OK
+Call-ID: 734b2fd4007e22e33d8c0e3035ae90a2@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5061>;tag=textclientv1.0
+To: "j" <sip:j@192.168.0.12:5060>;tag=888
+Via: SIP/2.0/UDP 192.168.0.12:5061;branch=branch1
+Content-Length: 0
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5060" 
+to="192.168.0.12:5061" 
+time="1370993313998"
+isSender="true" 
+transactionId="textclientv1.0:a0886eb640d3b93444737400ef479df5@192.168.0.12:1:message:192.168.0.12:5060" 
+callId="a0886eb640d3b93444737400ef479df5@192.168.0.12" 
+firstLine="MESSAGE sip:server@192.168.0.12:5061;transport=udp SIP/2.0" 
+>
+<![CDATA[MESSAGE sip:server@192.168.0.12:5061;transport=udp SIP/2.0
+Call-ID: a0886eb640d3b93444737400ef479df5@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5060>;tag=textclientv1.0
+To: "server" <sip:server@192.168.0.12:5061>
+Via: SIP/2.0/UDP 192.168.0.12:5060;branch=branch1
+Max-Forwards: 70
+Contact: "j" <sip:j@192.168.0.12:5060>
+Content-Type: text/plain
+Content-Length: 12
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5060" 
+to="192.168.0.12:5061" 
+time="1370993314042"
+isSender="false" 
+transactionId="textclientv1.0:a0886eb640d3b93444737400ef479df5@192.168.0.12:1:message:192.168.0.12:5060" 
+callId="a0886eb640d3b93444737400ef479df5@192.168.0.12" 
+firstLine="MESSAGE sip:server@192.168.0.12:5061;transport=udp SIP/2.0" 
+>
+<![CDATA[MESSAGE sip:server@192.168.0.12:5061;transport=udp SIP/2.0
+Call-ID: a0886eb640d3b93444737400ef479df5@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5060>;tag=textclientv1.0
+To: "server" <sip:server@192.168.0.12:5061>
+Via: SIP/2.0/UDP 192.168.0.12:5060;branch=branch1
+Max-Forwards: 70
+Contact: "j" <sip:j@192.168.0.12:5060>
+Content-Type: text/plain
+Content-Length: 12
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5061" 
+to="192.168.0.12:5060" 
+time="1370993314207"
+isSender="true" 
+transactionId="textclientv1.0:a0886eb640d3b93444737400ef479df5@192.168.0.12:1:message:192.168.0.12:5060" 
+callId="a0886eb640d3b93444737400ef479df5@192.168.0.12" 
+firstLine="SIP/2.0 200 OK" 
+>
+<![CDATA[SIP/2.0 200 OK
+Call-ID: a0886eb640d3b93444737400ef479df5@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5060>;tag=textclientv1.0
+To: "server" <sip:server@192.168.0.12:5061>;tag=888
+Via: SIP/2.0/UDP 192.168.0.12:5060;branch=branch1
+Content-Length: 0
+
+]]>
+</message>
+
+<!-- Use the  Trace Viewer in src/tools/tracesviewer to view this  trace  
+Here are the stack configuration properties 
+javax.sip.IP_ADDRESS= 192.168.0.12
+javax.sip.STACK_NAME= TextClient
+javax.sip.ROUTER_PATH= null
+javax.sip.OUTBOUND_PROXY= null
+-->
+<!-- Use the  Trace Viewer in src/tools/tracesviewer to view this  trace  
+Here are the stack configuration properties 
+javax.sip.IP_ADDRESS= 192.168.0.12
+javax.sip.STACK_NAME= TextClient
+javax.sip.ROUTER_PATH= null
+javax.sip.OUTBOUND_PROXY= null
+-->
+<message
+from="192.168.0.12:5060" 
+to="192.168.0.12:5061" 
+time="1370993840264"
+isSender="true" 
+transactionId="textclientv1.0:f1875e3b3f58eb3ee052af4258730c2d@192.168.0.12:1:message:192.168.0.12:5060" 
+callId="f1875e3b3f58eb3ee052af4258730c2d@192.168.0.12" 
+firstLine="MESSAGE sip:server@192.168.0.12:5061;transport=udp SIP/2.0" 
+>
+<![CDATA[MESSAGE sip:server@192.168.0.12:5061;transport=udp SIP/2.0
+Call-ID: f1875e3b3f58eb3ee052af4258730c2d@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5060>;tag=textclientv1.0
+To: "server" <sip:server@192.168.0.12:5061>
+Via: SIP/2.0/UDP 192.168.0.12:5060;branch=branch1
+Max-Forwards: 70
+Contact: "j" <sip:j@192.168.0.12:5060>
+Content-Type: text/plain
+Content-Length: 9
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5060" 
+to="192.168.0.12:5061" 
+time="1370993840431"
+isSender="false" 
+transactionId="textclientv1.0:f1875e3b3f58eb3ee052af4258730c2d@192.168.0.12:1:message:192.168.0.12:5060" 
+callId="f1875e3b3f58eb3ee052af4258730c2d@192.168.0.12" 
+firstLine="MESSAGE sip:server@192.168.0.12:5061;transport=udp SIP/2.0" 
+>
+<![CDATA[MESSAGE sip:server@192.168.0.12:5061;transport=udp SIP/2.0
+Call-ID: f1875e3b3f58eb3ee052af4258730c2d@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5060>;tag=textclientv1.0
+To: "server" <sip:server@192.168.0.12:5061>
+Via: SIP/2.0/UDP 192.168.0.12:5060;branch=branch1
+Max-Forwards: 70
+Contact: "j" <sip:j@192.168.0.12:5060>
+Content-Type: text/plain
+Content-Length: 9
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5061" 
+to="192.168.0.12:5060" 
+time="1370993841968"
+isSender="true" 
+transactionId="textclientv1.0:230af32d298d7509699253b1b4eca6f2@192.168.0.12:1:message:192.168.0.12:5061" 
+callId="230af32d298d7509699253b1b4eca6f2@192.168.0.12" 
+firstLine="MESSAGE sip:j@192.168.0.12:5060;transport=udp SIP/2.0" 
+>
+<![CDATA[MESSAGE sip:j@192.168.0.12:5060;transport=udp SIP/2.0
+Call-ID: 230af32d298d7509699253b1b4eca6f2@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5061>;tag=textclientv1.0
+To: "j" <sip:j@192.168.0.12:5060>
+Via: SIP/2.0/UDP 192.168.0.12:5061;branch=branch1
+Max-Forwards: 70
+Contact: "j" <sip:j@192.168.0.12:5061>
+Content-Type: text/plain
+Content-Length: 25
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5061" 
+to="192.168.0.12:5060" 
+time="1370993842038"
+isSender="true" 
+transactionId="textclientv1.0:f1875e3b3f58eb3ee052af4258730c2d@192.168.0.12:1:message:192.168.0.12:5060" 
+callId="f1875e3b3f58eb3ee052af4258730c2d@192.168.0.12" 
+firstLine="SIP/2.0 200 OK" 
+>
+<![CDATA[SIP/2.0 200 OK
+Call-ID: f1875e3b3f58eb3ee052af4258730c2d@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5060>;tag=textclientv1.0
+To: "server" <sip:server@192.168.0.12:5061>;tag=888
+Via: SIP/2.0/UDP 192.168.0.12:5060;branch=branch1
+Content-Length: 0
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5061" 
+to="192.168.0.12:5060" 
+time="1370993841981"
+isSender="false" 
+transactionId="textclientv1.0:230af32d298d7509699253b1b4eca6f2@192.168.0.12:1:message:192.168.0.12:5061" 
+callId="230af32d298d7509699253b1b4eca6f2@192.168.0.12" 
+firstLine="MESSAGE sip:j@192.168.0.12:5060;transport=udp SIP/2.0" 
+>
+<![CDATA[MESSAGE sip:j@192.168.0.12:5060;transport=udp SIP/2.0
+Call-ID: 230af32d298d7509699253b1b4eca6f2@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5061>;tag=textclientv1.0
+To: "j" <sip:j@192.168.0.12:5060>
+Via: SIP/2.0/UDP 192.168.0.12:5061;branch=branch1
+Max-Forwards: 70
+Contact: "j" <sip:j@192.168.0.12:5061>
+Content-Type: text/plain
+Content-Length: 25
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5061" 
+to="192.168.0.12:5060" 
+time="1370993842566"
+isSender="false" 
+transactionId="textclientv1.0:f1875e3b3f58eb3ee052af4258730c2d@192.168.0.12:1:message:192.168.0.12:5060" 
+callId="f1875e3b3f58eb3ee052af4258730c2d@192.168.0.12" 
+firstLine="SIP/2.0 200 OK" 
+>
+<![CDATA[SIP/2.0 200 OK
+Call-ID: f1875e3b3f58eb3ee052af4258730c2d@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5060>;tag=textclientv1.0
+To: "server" <sip:server@192.168.0.12:5061>;tag=888
+Via: SIP/2.0/UDP 192.168.0.12:5060;branch=branch1
+Content-Length: 0
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5060" 
+to="192.168.0.12:5061" 
+time="1370993843003"
+isSender="true" 
+transactionId="textclientv1.0:230af32d298d7509699253b1b4eca6f2@192.168.0.12:1:message:192.168.0.12:5061" 
+callId="230af32d298d7509699253b1b4eca6f2@192.168.0.12" 
+firstLine="SIP/2.0 200 OK" 
+>
+<![CDATA[SIP/2.0 200 OK
+Call-ID: 230af32d298d7509699253b1b4eca6f2@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5061>;tag=textclientv1.0
+To: "j" <sip:j@192.168.0.12:5060>;tag=888
+Via: SIP/2.0/UDP 192.168.0.12:5061;branch=branch1
+Content-Length: 0
+
+]]>
+</message>
+
+<message
+from="192.168.0.12:5060" 
+to="192.168.0.12:5061" 
+time="1370993843041"
+isSender="false" 
+transactionId="textclientv1.0:230af32d298d7509699253b1b4eca6f2@192.168.0.12:1:message:192.168.0.12:5061" 
+callId="230af32d298d7509699253b1b4eca6f2@192.168.0.12" 
+firstLine="SIP/2.0 200 OK" 
+>
+<![CDATA[SIP/2.0 200 OK
+Call-ID: 230af32d298d7509699253b1b4eca6f2@192.168.0.12
+CSeq: 1 MESSAGE
+From: "j" <sip:j@192.168.0.12:5061>;tag=textclientv1.0
+To: "j" <sip:j@192.168.0.12:5060>;tag=888
+Via: SIP/2.0/UDP 192.168.0.12:5061;branch=branch1
+Content-Length: 0
+
+]]>
+</message>
+
