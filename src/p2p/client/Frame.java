@@ -5,8 +5,13 @@
 package p2p.client;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.LinkedList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import p2p.model.MessageProcessor;
 import p2p.model.SipLayer;
 
@@ -19,18 +24,21 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
     private SipLayer sipLayer;
     private String serverNotificer;
     private DefaultListModel modelo;
+    private LinkedList<String> clients;
 
     /**
      * Creates new form Frame
      */
     public Frame(SipLayer sip, String ipServer, int portServer) {
         initComponents();
+        onclose();
         sipLayer = sip;
         String from = "sip:" + sip.getUsername() + "@" + sip.getHost() + ":" + sip.getPort();
         this.setTitle(from);
         this.serverNotificer = "sip:server@" + ipServer + ":" + portServer;
         modelo = new DefaultListModel();
         this.list.setModel(modelo);
+        this.list.addListSelectionListener(new HandlerList());
         try {
             this.sipLayer.sendMessage(this.serverNotificer, "connected");
         } catch (Throwable e) {
@@ -82,19 +90,19 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(sendBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(sendMessages)
-                            .addComponent(toAddress))))
+                            .addComponent(toAddress)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(sendBtn))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -145,9 +153,24 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
 
     }
 
+    public void onclose() {
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent evt) {
+                try {
+                    sipLayer.sendMessage(serverNotificer, "disconnected");
+                } catch (Throwable e) {
+                    e.printStackTrace();
+                    receivedMessages.append("Error notificando al tracker: " + e.getMessage() + "\n");
+                }
+                System.exit(0);
+            }
+        });
+    }
+
     @Override
     public void processMessage(String sender, String message) {
         if (message.charAt(0) == '*') {
+            clients = new LinkedList<>();
             mostrarUsuario(message);
         }
         this.receivedMessages.append("De " + sender + ": " + message + "\n");
@@ -164,11 +187,20 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
     }
 
     private void mostrarUsuario(String message) {
-
         String[] str = message.split("\\ ");
+        String s;
         for (int i = 0; i < str.length; i++) {
-            modelo.addElement(str[i]);
+            s = str[i];
+            this.clients.add(s);
+            modelo.addElement(s.substring(s.indexOf(":") + 1, s.indexOf("@")));
         }
+    }
 
+    class HandlerList implements ListSelectionListener {
+
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            toAddress.setText(clients.get(list.getSelectedIndex()));
+        }
     }
 }
