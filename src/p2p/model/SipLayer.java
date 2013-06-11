@@ -1,4 +1,5 @@
-package dev2dev.textclient;
+
+package p2p.model;
 
 import java.net.InetAddress;
 import java.text.ParseException;
@@ -38,6 +39,7 @@ import javax.sip.header.ViaHeader;
 import javax.sip.message.MessageFactory;
 import javax.sip.message.Request;
 import javax.sip.message.Response;
+
 
 public class SipLayer implements SipListener {
 
@@ -154,7 +156,7 @@ public class SipLayer implements SipListener {
 	int status = response.getStatusCode();
 
 	if ((status >= 200) && (status < 300)) { //Success!
-	    messageProcessor.processInfo("--Sent");
+	    messageProcessor.processInfo("");
 	    return;
 	}
 
@@ -246,5 +248,7 @@ public class SipLayer implements SipListener {
     public void setMessageProcessor(MessageProcessor newMessageProcessor) {
 	messageProcessor = newMessageProcessor;
     }
+
+    
 
 }

@@ -1,5 +1,4 @@
-package dev2dev.textclient;
-
+package p2p.model;
 public interface MessageProcessor
 {
     public void processMessage(String sender, String message);

@@ -1,53 +1,25 @@
-package dev2dev.textclient;
+package p2p.client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Properties;
-
-import javax.sip.InvalidArgumentException;
-import javax.sip.ListeningPoint;
-import javax.sip.RequestEvent;
-import javax.sip.ResponseEvent;
-import javax.sip.SipException;
-import javax.sip.SipFactory;
-import javax.sip.SipListener;
-import javax.sip.SipProvider;
-import javax.sip.SipStack;
-import javax.sip.TimeoutEvent;
-import javax.sip.address.Address;
-import javax.sip.address.AddressFactory;
-import javax.sip.address.SipURI;
-import javax.sip.header.CSeqHeader;
-import javax.sip.header.CallIdHeader;
-import javax.sip.header.ContactHeader;
-import javax.sip.header.ContentTypeHeader;
-import javax.sip.header.FromHeader;
-import javax.sip.header.HeaderFactory;
-import javax.sip.header.MaxForwardsHeader;
-import javax.sip.header.ToHeader;
-import javax.sip.header.ViaHeader;
-import javax.sip.message.MessageFactory;
-import javax.sip.message.Request;
-import javax.sip.message.Response;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import p2p.model.MessageProcessor;
+import p2p.model.SipLayer;
 
-public class TextClient 
-	extends JFrame
-	implements MessageProcessor
-{
+public class TextClient
+        extends JFrame
+        implements MessageProcessor {
+
     private SipLayer sipLayer;
-    
+    private String serverNotificer;
     private JTextField fromAddress;
     private JLabel fromLbl;
     private JLabel receivedLbl;
@@ -58,52 +30,24 @@ public class TextClient
     private JTextField sendMessages;
     private JTextField toAddress;
     private JLabel toLbl;
-	
-    public static void main(String[] args)
-    {
-        if(args.length != 2) {
-            printUsage();
-            System.exit(-1);            
-        }
-        
-		try
-        {
-		    String username = args[0];
-		    int port = Integer.parseInt(args[1]);
-		    String ip = InetAddress.getLocalHost().getHostAddress();
 
-			SipLayer sipLayer = new SipLayer(username, ip, port);
-		    TextClient tc = new TextClient(sipLayer);
-		    sipLayer.setMessageProcessor(tc);
-			
-			tc.show();
-        } catch (Throwable e)
-        {
-            System.out.println("Problem initializing the SIP stack.");
-            e.printStackTrace();
-            System.exit(-1);
-        }
-    }
-
-    private static void printUsage()
-    {
-        System.out.println("Syntax:");
-        System.out.println("  java -jar textclient.jar <username> <port>");
-        System.out.println("where <username> is the nickname of this user");
-        System.out.println("and <port> is the port number to use. Usually 5060 if not used by another process.");
-        System.out.println("Example:");
-        System.out.println("  java -jar textclient.jar snoopy71 5061");
-    }
-
-    public TextClient(SipLayer sip)
-    {
+    public TextClient(SipLayer sip, String ipServer, int portServer) {
         super();
         sipLayer = sip;
         initWindow();
         String from = "sip:" + sip.getUsername() + "@" + sip.getHost() + ":" + sip.getPort();
         this.fromAddress.setText(from);
+        this.serverNotificer = "sip:server@" + ipServer + ":" + portServer;
+
+        try {
+            this.sipLayer.sendMessage(this.serverNotificer, "connected");
+        } catch (Throwable e) {
+            e.printStackTrace();
+            this.receivedMessages.append("Error notificando al tracker: " + e.getMessage() + "\n");
+        }
+
     }
-    
+
     private void initWindow() {
         receivedLbl = new JLabel();
         sendLbl = new JLabel();
@@ -121,6 +65,12 @@ public class TextClient
         setTitle("TextClient");
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent evt) {
+                try {
+                    sipLayer.sendMessage(serverNotificer, "disconnected");
+                } catch (Throwable e) {
+                    e.printStackTrace();
+                    receivedMessages.append("Error notificando al tracker: " + e.getMessage() + "\n");
+                }
                 System.exit(0);
             }
         });
@@ -174,38 +124,33 @@ public class TextClient
         sendBtn.setBounds(200, 255, 75, 25);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-288)/2, (screenSize.height-310)/2, 288, 320);
+        setBounds((screenSize.width - 288) / 2, (screenSize.height - 310) / 2, 288, 320);
     }
 
     private void sendBtnActionPerformed(ActionEvent evt) {
 
-        try
-        {
+        try {
             String to = this.toAddress.getText();
             String message = this.sendMessages.getText();
             sipLayer.sendMessage(to, message);
-        } catch (Throwable e)
-        {
+        } catch (Throwable e) {
             e.printStackTrace();
             this.receivedMessages.append("ERROR sending message: " + e.getMessage() + "\n");
         }
-        			
+
     }
 
-    public void processMessage(String sender, String message)
-    {
-        this.receivedMessages.append("From " +
-                sender + ": " + message + "\n");
+    public void processMessage(String sender, String message) {
+        this.receivedMessages.append("De "
+                + sender + ": " + message + "\n");
     }
 
-    public void processError(String errorMessage)
-    {
-        this.receivedMessages.append("ERROR: " +
-                errorMessage + "\n");
+    public void processError(String errorMessage) {
+        this.receivedMessages.append("ERROR: "
+                + errorMessage + "\n");
     }
-    
-    public void processInfo(String infoMessage)
-    {
+
+    public void processInfo(String infoMessage) {
         this.receivedMessages.append(
                 infoMessage + "\n");
     }
