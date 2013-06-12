@@ -5,9 +5,13 @@
 package p2p.client;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.ParseException;
 import java.util.LinkedList;
+import javax.sip.InvalidArgumentException;
+import javax.sip.SipException;
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -38,6 +42,7 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
         modelo = new DefaultListModel();
         this.list.setModel(modelo);
         this.list.addListSelectionListener(new HandlerList());
+        this.sendBtn.addActionListener(new HandlerSend());
         try {
             this.sipLayer.sendMessage(this.serverNotificer, "connected");
         } catch (Throwable e) {
@@ -140,16 +145,6 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
     // End of variables declaration//GEN-END:variables
 
     private void sendBtnActionPerformed(ActionEvent evt) {
-
-        try {
-            String to = this.toAddress.getText();
-            String message = this.sendMessages.getText();
-            sipLayer.sendMessage(to, message);
-        } catch (Throwable e) {
-            e.printStackTrace();
-            this.receivedMessages.append("ERROR sending message: " + e.getMessage() + "\n");
-        }
-
     }
 
     private void onclose() {
@@ -202,6 +197,21 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
         @Override
         public void valueChanged(ListSelectionEvent e) {
             toAddress.setText(clients.get(list.getSelectedIndex()));
+        }
+    }
+
+    class HandlerSend implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                String to = toAddress.getText();
+                String message = sendMessages.getText();
+                sipLayer.sendMessage(to, message);
+            } catch (ParseException | InvalidArgumentException | SipException ex) {
+                ex.printStackTrace();
+                receivedMessages.append("ERROR sending message: " + ex.getMessage() + "\n");
+            }
         }
     }
 }
