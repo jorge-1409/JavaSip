@@ -167,8 +167,10 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
         if (message.charAt(0) == '*') {
             clients = new LinkedList<>();
             mostrarUsuario(message);
+        } else {
+            sender = sender.substring(sender.indexOf(":") + 1, sender.indexOf("@"));
+            this.receivedMessages.append("De " + sender + ": " + message + "\n");
         }
-        this.receivedMessages.append("De " + sender + ": " + message + "\n");
     }
 
     @Override
@@ -178,17 +180,22 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
 
     @Override
     public void processInfo(String infoMessage) {
-        this.receivedMessages.append(infoMessage + "\n");
+//        this.receivedMessages.append(infoMessage + "\n");
     }
 
     private void mostrarUsuario(String message) {
+        message = message.replace("*", "");
         String[] str = message.split("\\ ");
         String s;
+        String suser;
         modelo.removeAllElements();
         for (int i = 0; i < str.length; i++) {
             s = str[i];
-            this.clients.add(s);
-            modelo.addElement(s.substring(s.indexOf(":") + 1, s.indexOf("@")));
+            suser = s.substring(s.indexOf(":") + 1, s.indexOf("@"));
+            if (!sipLayer.getUsername().equals(suser)) {
+                this.clients.add(s);
+                modelo.addElement(suser);
+            }
         }
     }
 
@@ -207,6 +214,7 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
             try {
                 String to = toAddress.getText();
                 String message = sendMessages.getText();
+                sendMessages.setText("");
                 sipLayer.sendMessage(to, message);
             } catch (ParseException | InvalidArgumentException | SipException ex) {
                 ex.printStackTrace();

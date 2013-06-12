@@ -7,7 +7,6 @@ package p2p.main;
 import java.net.InetAddress;
 import javax.swing.JOptionPane;
 import p2p.client.Frame;
-import p2p.client.TextClient;
 import p2p.model.SipLayer;
 import p2p.server.Server;
 
@@ -30,7 +29,8 @@ public class Main {
         //configura el puerto del servidor
         int portServer = 5061;
         try {
-            String username = args[0];
+//            String username = args[0];
+            String username = JOptionPane.showInputDialog("Username");
             String ip = InetAddress.getLocalHost().getHostAddress();
             if ("server".equalsIgnoreCase(username)) {
                 SipLayer sipLayer = new SipLayer("j", "192.168.0.12", 5061);
@@ -41,21 +41,22 @@ public class Main {
                     printUsage();
                     System.exit(-2);
                 }
-                int port = Integer.parseInt(args[1]);
+//                int port = Integer.parseInt(args[1]);
+                int port = Integer.parseInt(JOptionPane.showInputDialog("puerto"));
                 SipLayer sipLayer = new SipLayer(username, ip, port);
-                
+
                 Frame tc = new Frame(sipLayer, ipServer, portServer);
                 sipLayer.setMessageProcessor(tc);
                 tc.show();
             }
         } catch (Throwable e) {
-            
+
             System.out.println("Problem initializing the SIP stack.");
             e.printStackTrace();
             System.exit(-1);
         }
     }
-    
+
     private static void printUsage() {
         System.out.println("Syntax:");
         System.out.println("  java -jar textclient.jar <username> <port>");
