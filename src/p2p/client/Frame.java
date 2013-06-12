@@ -43,6 +43,7 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
         this.list.setModel(modelo);
         this.list.addListSelectionListener(new HandlerList());
         this.sendBtn.addActionListener(new HandlerSend());
+        toAddress.setEditable(false);
         try {
             this.sipLayer.sendMessage(this.serverNotificer, "connected");
         } catch (Throwable e) {
@@ -68,6 +69,7 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
         jLabel2 = new javax.swing.JLabel();
         sendBtn = new javax.swing.JButton();
         sendMessages = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,9 +85,17 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
             }
         });
 
-        jLabel2.setText("Destinatario");
+        jLabel2.setText("Destinatario :");
 
         sendBtn.setText("Enviar");
+
+        sendMessages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendMessagesActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Mensaje :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,7 +105,9 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(sendMessages)
@@ -117,7 +129,9 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(sendMessages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sendMessages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(toAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -133,7 +147,21 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
     private void toAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toAddressActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_toAddressActionPerformed
+
+    private void sendMessagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessagesActionPerformed
+        try {
+            String to = toAddress.getText();
+            String message = sendMessages.getText();
+            sendMessages.setText("");
+            sipLayer.sendMessage(to, message);
+            receivedMessages.append("para " + to.substring(to.indexOf(":") + 1, to.indexOf("@")) + ": " + message + "\n");
+        } catch (ParseException | InvalidArgumentException | SipException ex) {
+            ex.printStackTrace();
+            receivedMessages.append("ERROR sending message: " + ex.getMessage() + "\n");
+        }
+    }//GEN-LAST:event_sendMessagesActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -189,6 +217,7 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
         String s;
         String suser;
         modelo.removeAllElements();
+        toAddress.setText("");
         for (int i = 0; i < str.length; i++) {
             s = str[i];
             suser = s.substring(s.indexOf(":") + 1, s.indexOf("@"));
@@ -216,6 +245,7 @@ public class Frame extends javax.swing.JFrame implements MessageProcessor {
                 String message = sendMessages.getText();
                 sendMessages.setText("");
                 sipLayer.sendMessage(to, message);
+                receivedMessages.append("\npara " + to.substring(to.indexOf(":") + 1, to.indexOf("@")) + ": " + message + "\n");
             } catch (ParseException | InvalidArgumentException | SipException ex) {
                 ex.printStackTrace();
                 receivedMessages.append("ERROR sending message: " + ex.getMessage() + "\n");
