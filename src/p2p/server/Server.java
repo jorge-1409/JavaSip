@@ -5,7 +5,6 @@
 package p2p.server;
 
 import java.util.LinkedList;
-import javax.sip.InvalidArgumentException;
 import p2p.model.MessageProcessor;
 import p2p.model.SipLayer;
 

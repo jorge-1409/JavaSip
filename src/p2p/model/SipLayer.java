@@ -40,7 +40,7 @@ import javax.sip.message.Request;
 import javax.sip.message.Response;
 import javax.swing.JOptionPane;
 
-public class SipLayer implements SipListener {
+public class SipLayer implements  SipListener {
 
     private MessageProcessor messageProcessor;
     private String username;
